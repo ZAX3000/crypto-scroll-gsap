@@ -105,10 +105,11 @@ const App: React.FC = () => {
     });
 
     gsap.fromTo('.text-container h1',
-      { x: '0%', textAlign: 'left' },
+      { x: '0%', textAlign: 'left', color: '#000' },
       {
         x: 'calc(100vw - 100% - 40px)', 
         textAlign: 'right',
+        color: '#aaa',
         scrollTrigger: {
           trigger: '.min-h-screen',
           start: 'top top',
@@ -123,7 +124,7 @@ const App: React.FC = () => {
               const isDesktop = window.innerWidth >= 1024;
               const offset = menuRect.left - textRect.width - (isDesktop ? 80 : 0);
               textContainer.style.transform = `translateX(${offset * self.progress}px)`;
-              textContainer.style.color = self.progress > 0.5 ? '#fff' : '#000';
+              textContainer.style.color = `rgb(${255 - 155 * self.progress}, ${255 - 155 * self.progress}, ${255 - 155 * self.progress})`;
             }
           }
         },
@@ -165,7 +166,7 @@ const App: React.FC = () => {
         <section className="pt-20 2xl:pt-28 pb-10 min-h-[1500px]">
           <div className="mx-auto fixed left-0 right-0 max-w-screen-2xl px-3 md:px-12 lg:px-28 2xl:px-2">
             <div className="text-container flex justify-between items-center">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl font-bold mb-12 2xl:mb-16 text-left">
+              <h1 className="text-3xl dark-gradient-text md:text-4xl lg:text-5xl 2xl:text-6xl font-bold mb-12 2xl:mb-16 text-left">
                 <span className="block font-normal">Remarkable</span>
                 <span className="block font-bold">Mining Experience.</span>
               </h1>
