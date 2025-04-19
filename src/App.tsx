@@ -165,7 +165,7 @@ const App: React.FC = () => {
         <section className="pt-20 2xl:pt-28 pb-10 min-h-[1500px]">
           <div className="mx-auto fixed left-0 right-0 max-w-screen-2xl px-3 md:px-12 lg:px-28 2xl:px-2">
             <div className="text-container flex justify-between items-center">
-              <h1 className="text-3xl md:text-4xl lg:text-7xl 2xl:text-6xl font-bold mb-12 2xl:mb-16 text-left">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl 2xl:text-6xl font-bold mb-12 2xl:mb-16 text-left">
                 <span className="block font-normal">Remarkable</span>
                 <span className="block font-bold">Mining Experience.</span>
               </h1>
