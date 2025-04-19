@@ -29,20 +29,6 @@ const App: React.FC = () => {
       },
     });
 
-    gsap.fromTo('.logo',
-      { opacity: 1, filter: 'invert(0)' },
-      {
-        opacity: 1,
-        filter: 'invert(0)',
-        scrollTrigger: {
-          trigger: '.min-h-screen',
-          start: 'top center',
-          end: 'bottom top',
-          scrub: true,
-        },
-      }
-    );
-
     gsap.to('.lorem-text', {
       color: '#fff',
       scrollTrigger: {
@@ -95,7 +81,7 @@ const App: React.FC = () => {
 
     gsap.to('video', {
       opacity: 0.5,
-      filter: 'grayscale(10%)',
+      filter: 'grayscale(20%)',
       scrollTrigger: {
         trigger: '.min-h-screen',
         start: 'top top',
@@ -104,32 +90,46 @@ const App: React.FC = () => {
       },
     });
 
-    gsap.fromTo('.text-container h1',
-      { x: '0%', textAlign: 'left', color: '#000' },
+    gsap.to('.main-heading', {
+      opacity: 0,
+      scrollTrigger: {
+        trigger: '.min-h-screen',
+        start: 'top top',
+        end: 'top+=150 top',
+        scrub: true,
+      },
+    });
+
+    gsap.fromTo('.menu-text',
+      { opacity: 0, x: 0 },
       {
-        x: 'calc(100vw - 100% - 40px)', 
-        textAlign: 'right',
-        color: '#aaa',
+        opacity: 1,
+        x: 0,
         scrollTrigger: {
           trigger: '.min-h-screen',
           start: 'top top',
-          end: 'bottom bottom',
+          end: 'top+=150 top',
           scrub: true,
-          onUpdate: self => {
-            const menuButton = document.querySelector('button[aria-label="Toggle menu"]');
-            const textContainer = document.querySelector('.text-container h1') as HTMLElement;
-            if (menuButton && textContainer) {
-              const menuRect = menuButton.getBoundingClientRect();
-              const textRect = textContainer.getBoundingClientRect();
-              const isDesktop = window.innerWidth >= 1024;
-              const offset = menuRect.left - textRect.width - (isDesktop ? 80 : 0);
-              textContainer.style.transform = `translateX(${offset * self.progress}px)`;
-              textContainer.style.color = `rgb(${255 - 155 * self.progress}, ${255 - 155 * self.progress}, ${255 - 155 * self.progress})`;
-            }
-          }
         },
       }
     );
+
+    gsap.to('.video-container video', {
+      scrollTrigger: {
+        trigger: '.min-h-screen',
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: true,
+        onEnter: () => {
+          const videoElement = document.querySelector('.video-container video') as HTMLVideoElement;
+          if (videoElement) {
+            videoElement.src = '/dark-looped_compressed.mp4';
+            videoElement.load();
+            videoElement.play();
+          }
+        },
+      },
+    });
 
     const handleScroll = () => {
       const logo = document.querySelector('.logo') as HTMLImageElement | null;
@@ -140,8 +140,6 @@ const App: React.FC = () => {
           logo.src = '/logo.png';
         }
       }
-
-      
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -165,17 +163,21 @@ const App: React.FC = () => {
         </header>
         <section className="pt-20 2xl:pt-28 pb-10 min-h-[1500px]">
           <div className="mx-auto fixed left-0 right-0 max-w-screen-2xl px-3 md:px-12 lg:px-28 2xl:px-2">
-            <div className="text-container flex justify-between items-center">
-              <h1 className="text-3xl dark-gradient-text md:text-4xl lg:text-5xl 2xl:text-6xl font-bold mb-12 2xl:mb-16 text-left">
+            <div className="text-container flex justify-between items-start mt-4 relative">
+              <h1 className="main-heading text-3xl dark-gradient-text md:text-4xl lg:text-5xl 2xl:text-6xl font-bold mb-12 2xl:mb-16 text-left">
                 <span className="block font-normal">Remarkable</span>
                 <span className="block font-bold">Mining Experience.</span>
               </h1>
+              <div className="menu-text opacity-0 absolute right-0 main-heading text-3xl dark-gradient-text md:text-4xl lg:text-5xl 2xl:text-6xl font-bold mb-12 2xl:mb-16 text-right">
+              <span className="block font-normal">Remarkable</span>
+              <span className="block font-bold">Mining Experience.</span>
+              </div>
             </div>
             <div className="rounded-2xl relative">
               <div className="relative w-full rounded-2xl overflow-hidden">
                 <div>
                   <div className="relative w-full overflow-hidden rounded-2xl">
-                    <video className="absolute inset-0 w-full h-full object-cover" autoPlay loop playsInline preload="auto" muted aria-hidden="true">
+                    <video className="absolute inset-0 w-full h-full object-cover video-container" autoPlay loop playsInline preload="auto" muted aria-hidden="true">
                       <source src="/light_looped_compressed.mp4" type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
