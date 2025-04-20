@@ -1,3 +1,13 @@
+# Crypto Strategy Scroll Showcase
+
+This project features a GSAP + TailwindCSS powered scroll experience including:
+- Mosaic hero video background
+- Scroll-triggered fade and blur transitions
+- Animated stat counters with Snap scroll
+- Responsive layout using Tailwind utility classes
+
+Originally built for a freelance client. Repurposed for portfolio after contract cancellation.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
